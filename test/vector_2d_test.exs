@@ -4,7 +4,6 @@ defmodule Vector2DTests do
   import MarsRover.Vector2D
 
   describe "addition" do
-
     [
       {new(0, 0), new(1, 1), new(1, 1)},
       {new(0, 0), new(1, 0), new(1, 0)},
@@ -13,7 +12,7 @@ defmodule Vector2DTests do
       {new(0, 0), new(-1, -1), new(-1, -1)},
       {new(0, 0), new(-1, 0), new(-1, 0)},
       {new(0, 0), new(0, -1), new(0, -1)},
-      {new(5, 7), new(2, -3), new(7, 4)},
+      {new(5, 7), new(2, -3), new(7, 4)}
     ]
     |> Enum.each(fn {vector1, vector2, sum} ->
       @tag vector1: vector1
@@ -23,7 +22,6 @@ defmodule Vector2DTests do
         assert add(ctx.vector1, ctx.vector2) == ctx.sum
       end
     end)
-
   end
 
   @north from_compass_heading(:north)
@@ -32,7 +30,6 @@ defmodule Vector2DTests do
   @west from_compass_heading(:west)
 
   describe "rotation by +- 90 degrees" do
-
     [
       {@north, 90, @east},
       {@north, -90, @west},
@@ -41,7 +38,7 @@ defmodule Vector2DTests do
       {@south, 90, @west},
       {@south, -90, @east},
       {@west, 90, @north},
-      {@west, -90, @south},
+      {@west, -90, @south}
     ]
     |> Enum.each(fn {vector, rotation, result} ->
       @tag vector: vector
@@ -51,7 +48,5 @@ defmodule Vector2DTests do
         assert rotate(ctx.vector, ctx.rotation) == ctx.result
       end
     end)
-
   end
-
 end

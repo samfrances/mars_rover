@@ -73,15 +73,15 @@ defmodule WorldTest do
     {World.new(10, 10), Vector2D.new(-3, 2), false},
     {World.new(10, 10), Vector2D.new(2, -3), false},
     {World.new(10, 10), Vector2D.new(-3, 12), false},
-    {World.new(10, 10), Vector2D.new(12, -3), false},
+    {World.new(10, 10), Vector2D.new(12, -3), false}
   ]
   |> Enum.each(fn {world, vector, within} ->
     @tag world: world
     @tag vector: vector
     @tag within: within
-    test "#{inspect vector} is#{if within, do: "", else: " not"} within #{inspect world}", ctx do
+    test "#{inspect(vector)} is#{if within, do: "", else: " not"} within #{inspect(world)}",
+         ctx do
       assert World.contains?(ctx.world, ctx.vector) == ctx.within
     end
   end)
-
 end

@@ -1,11 +1,10 @@
 defmodule MarsRover.Vector2D do
-
-  defstruct [x: 0, y: 0]
+  defstruct x: 0, y: 0
 
   @type t :: %__MODULE__{
-    x: integer(),
-    y: integer()
-  }
+          x: integer(),
+          y: integer()
+        }
 
   @spec new :: t()
   def new() do
@@ -26,9 +25,11 @@ defmodule MarsRover.Vector2D do
   def rotate(%__MODULE__{x: x, y: y}, 90) do
     new(y, -x)
   end
+
   def rotate(%__MODULE__{x: x, y: y}, -90) do
     new(-y, x)
   end
+
   def rotate(_vector, degrees) do
     raise "Vector rotation currently only supports +-90 degrees. Received: #{degrees}"
   end
@@ -37,14 +38,16 @@ defmodule MarsRover.Vector2D do
   def from_compass_heading(:north) do
     new(0, 1)
   end
+
   def from_compass_heading(:east) do
     new(1, 0)
   end
+
   def from_compass_heading(:south) do
     new(0, -1)
   end
+
   def from_compass_heading(:west) do
     new(-1, 0)
   end
-
 end
