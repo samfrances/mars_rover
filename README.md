@@ -66,10 +66,13 @@ Run `mix escript.build`
 
 ```
 $ ./mars_rover <<EOF
-> 4 8
-> (2, 3, N) FLLFR
-> (1, 0, S) FFRLF
-> EOF
+4 8
+(2, 3, N) FLLFR
+(1, 0, S) FFRLF
+EOF
+```
+Output:
+```
 (2, 3, W)
 (1, 0, S) LOST
 ```
