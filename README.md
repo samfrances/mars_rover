@@ -1,4 +1,4 @@
-# Mars Rover
+# Mars Rover kata
 
 Write a program that takes in commands and moves one or more robots around
 Mars.
@@ -47,6 +47,14 @@ The output would be:
 (2, 3, W)
 (1, 0, S) LOST
 ```
+## Scope for further development
+
+- [ ] CLI interface
+- [ ] Process each robot concurrently?
+- [ ] Collision detection?
+- [ ] Property-based testing?
+- [ ] More granular directions, rather than just compass headings
+- [ ] Some sort of graphical interface?
 
 ## Installation
 
