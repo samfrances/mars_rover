@@ -44,6 +44,7 @@ defmodule MarsRover.Rover do
 
   def last_known_location(rover) do
     back_one_step = reverse(rover)
+
     if not is_lost(back_one_step) do
       back_one_step.position
     else
@@ -68,15 +69,18 @@ defimpl String.Chars, for: MarsRover.Rover do
   alias MarsRover.Rover.Format
   alias MarsRover.Rover
   require MarsRover.Rover
+
   def to_string(rover = %MarsRover.Rover{world: _world, vector: vector}) do
     is_lost? = Rover.is_lost(rover)
     lost_string = if is_lost?, do: " LOST", else: ""
+
     position =
       if is_lost? do
         Rover.last_known_location(rover)
       else
         rover.position
       end
+
     "(#{position.x}, #{position.y}, #{Format.vector(vector)})#{lost_string}"
   end
 end
