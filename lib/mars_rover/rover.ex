@@ -41,4 +41,18 @@ defmodule MarsRover.Rover do
   def run_command(rover = %__MODULE__{vector: vector}, :L) do
     %{rover | vector: Vector2D.rotate(vector, @left)}
   end
+
+  def last_known_location(rover) do
+    back_one_step = reverse(rover)
+    if not is_lost(back_one_step) do
+      back_one_step.position
+    else
+      :unknown
+    end
+  end
+
+  defp reverse(rover = %__MODULE__{position: position, vector: vector}) do
+    reverse_vector = Vector2D.new(-vector.x, -vector.y)
+    %{rover | position: Vector2D.add(position, reverse_vector)}
+  end
 end

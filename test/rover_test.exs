@@ -102,4 +102,26 @@ defmodule RoverTest do
       end
     end)
   end
+
+  describe "last known location:" do
+    [
+      {"long out of bounds", Vector2D.new(100, 100), :north, :unknown},
+      {"just north", Vector2D.new(0, 11), :north, Vector2D.new(0, 10)},
+      {"just south", Vector2D.new(0, -1), :south, Vector2D.new(0, 0)},
+      {"just east", Vector2D.new(11, 5), :east, Vector2D.new(10, 5)},
+      {"just west", Vector2D.new(-1, 5), :west, Vector2D.new(0, 5)},
+    ]
+    |> Enum.each(fn {description, position, heading, last_known_location} ->
+      @tag description: description
+      @tag position: position
+      @tag heading: heading
+      @tag last_known_location: last_known_location
+      test description, ctx do
+        assert (
+          Rover.new(@world, ctx.position, ctx.heading)
+          |> Rover.last_known_location()
+        ) == ctx.last_known_location
+      end
+    end)
+  end
 end
