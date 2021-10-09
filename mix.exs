@@ -8,7 +8,8 @@ defmodule MarsRover.MixProject do
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      elixirc_options: [warnings_as_errors: true]
+      elixirc_options: [warnings_as_errors: true],
+      escript: escript(),
     ]
   end
 
@@ -24,5 +25,9 @@ defmodule MarsRover.MixProject do
     [
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
+  end
+
+  defp escript do
+    [main_module: MarsRover.CLI]
   end
 end

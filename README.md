@@ -47,9 +47,36 @@ The output would be:
 (2, 3, W)
 (1, 0, S) LOST
 ```
+
+## Usage
+
+### Run the tests
+
+Run `mix test` or `mix test --trace`.
+
+### Run "type checks"
+
+Run `mix dialyzer`.
+
+### Build the CLI
+
+Run `mix escript.build`
+
+### Example CLI usage
+
+```
+$ ./mars_rover <<EOF
+> 4 8
+> (2, 3, N) FLLFR
+> (1, 0, S) FFRLF
+> EOF
+(2, 3, W)
+(1, 0, S) LOST
+```
+
 ## Scope for further development
 
-- [ ] CLI interface
+- [ ] Better CLI interface
 - [ ] Process each robot concurrently?
 - [ ] Collision detection?
 - [ ] Property-based testing?

@@ -4,13 +4,15 @@ defmodule MarsRover do
 
   def run(file_text) do
     with {:ok, programs} <- Parser.parse_file(file_text) do
-      programs
-      |> Enum.map(fn {robot, commands} ->
-        commands
-        |> Enum.reduce(robot, &run_command/2)
-      end)
-      |> Enum.map(&to_string/1)
-      |> Enum.join("\n")
+      printout =
+        programs
+        |> Enum.map(fn {robot, commands} ->
+          commands
+          |> Enum.reduce(robot, &run_command/2)
+        end)
+        |> Enum.map(&to_string/1)
+        |> Enum.join("\n")
+      {:ok, printout}
     end
   end
 
