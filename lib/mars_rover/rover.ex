@@ -16,6 +16,8 @@ defmodule MarsRover.Rover do
   @right 90
   @left -90
 
+  defguard is_lost(rover) when not World.contains?(rover.world, rover.position)
+
   @spec new(World.t(), Vector2D.t(), :east | :north | :south | :west) :: t()
   def new(world, position, orientation) do
     %__MODULE__{
@@ -25,7 +27,9 @@ defmodule MarsRover.Rover do
     }
   end
 
-  @spec run_command(t(), :F|:R|:L) :: t()
+  @spec run_command(t(), :F | :R | :L) :: t()
+  def run_command(rover, _command) when is_lost(rover), do: rover
+
   def run_command(rover = %__MODULE__{vector: vector, position: position}, :F) do
     %{rover | position: Vector2D.add(position, vector)}
   end

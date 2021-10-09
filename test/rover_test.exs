@@ -80,4 +80,26 @@ defmodule RoverTest do
            |> Rover.run_command(:L)
            |> Rover.run_command(:L) == north
   end
+
+  describe "lost rovers don't move:" do
+    [
+      {"lost north", Rover.new(@world, Vector2D.new(1, 11), :north)},
+      {"lost east", Rover.new(@world, Vector2D.new(11, 1), :north)},
+      {"lost south", Rover.new(@world, Vector2D.new(1, -1), :north)},
+      {"lost west", Rover.new(@world, Vector2D.new(-1, 1), :north)},
+      {"lost northeast", Rover.new(@world, Vector2D.new(11, 11), :north)},
+      {"lost northwest", Rover.new(@world, Vector2D.new(-1, 11), :north)},
+      {"lost southeast", Rover.new(@world, Vector2D.new(11, -1), :north)},
+      {"lost southwest", Rover.new(@world, Vector2D.new(-1, -1), :north)}
+    ]
+    |> Enum.each(fn {description, rover} ->
+      @tag description: description
+      @tag rover: rover
+      test description, ctx do
+        assert ctx.rover |> Rover.run_command(:F) == ctx.rover
+        assert ctx.rover |> Rover.run_command(:R) == ctx.rover
+        assert ctx.rover |> Rover.run_command(:L) == ctx.rover
+      end
+    end)
+  end
 end
