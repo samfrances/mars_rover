@@ -55,4 +55,28 @@ defmodule MarsRover.Rover do
     reverse_vector = Vector2D.new(-vector.x, -vector.y)
     %{rover | position: Vector2D.add(position, reverse_vector)}
   end
+
+  defmodule Format do
+    def vector(%Vector2D{x: 0, y: 1}), do: "N"
+    def vector(%Vector2D{x: 1, y: 0}), do: "E"
+    def vector(%Vector2D{x: 0, y: -1}), do: "S"
+    def vector(%Vector2D{x: -1, y: 0}), do: "W"
+  end
+end
+
+defimpl String.Chars, for: MarsRover.Rover do
+  alias MarsRover.Rover.Format
+  alias MarsRover.Rover
+  require MarsRover.Rover
+  def to_string(rover = %MarsRover.Rover{world: _world, vector: vector}) do
+    is_lost? = Rover.is_lost(rover)
+    lost_string = if is_lost?, do: " LOST", else: ""
+    position =
+      if is_lost? do
+        Rover.last_known_location(rover)
+      else
+        rover.position
+      end
+    "(#{position.x}, #{position.y}, #{Format.vector(vector)})#{lost_string}"
+  end
 end

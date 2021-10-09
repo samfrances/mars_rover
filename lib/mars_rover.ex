@@ -1,18 +1,20 @@
 defmodule MarsRover do
-  @moduledoc """
-  Documentation for `MarsRover`.
-  """
+  alias MarsRover.Parser
+  alias MarsRover.Rover
 
-  @doc """
-  Hello world.
+  def run(file_text) do
+    with {:ok, programs} <- Parser.parse_file(file_text) do
+      programs
+      |> Enum.map(fn {robot, commands} ->
+        commands
+        |> Enum.reduce(robot, &run_command/2)
+      end)
+      |> Enum.map(&to_string/1)
+      |> Enum.join("\n")
+    end
+  end
 
-  ## Examples
-
-      iex> MarsRover.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  defp run_command(command, rover) do
+    Rover.run_command(rover, command)
   end
 end
