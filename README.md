@@ -77,6 +77,12 @@ Output:
 (1, 0, S) LOST
 ```
 
+Alternatively:
+
+```
+cat instructions.txt | ./mars_rover
+```
+
 ## Scope for further development
 
 - [ ] Better CLI interface
