@@ -7,6 +7,11 @@ defmodule MarsRover.Vector2D do
     y: integer()
   }
 
+  @spec new :: t()
+  def new() do
+    new(0, 0)
+  end
+
   @spec new(x :: integer(), y :: integer()) :: t()
   def new(x, y) do
     %__MODULE__{x: x, y: y}
@@ -26,6 +31,20 @@ defmodule MarsRover.Vector2D do
   end
   def rotate(_vector, degrees) do
     raise "Vector rotation currently only supports +-90 degrees. Received: #{degrees}"
+  end
+
+  @spec from_compass_heading(:east | :north | :south | :west) :: t()
+  def from_compass_heading(:north) do
+    new(0, 1)
+  end
+  def from_compass_heading(:east) do
+    new(1, 0)
+  end
+  def from_compass_heading(:south) do
+    new(0, -1)
+  end
+  def from_compass_heading(:west) do
+    new(-1, 0)
   end
 
 end

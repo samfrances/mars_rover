@@ -26,10 +26,10 @@ defmodule Vector2DTests do
 
   end
 
-  @north new(0, 1)
-  @east new(1, 0)
-  @south new(0, -1)
-  @west new(-1, 0)
+  @north from_compass_heading(:north)
+  @east from_compass_heading(:east)
+  @south from_compass_heading(:south)
+  @west from_compass_heading(:west)
 
   describe "rotation by +- 90 degrees" do
 
