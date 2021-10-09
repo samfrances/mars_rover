@@ -17,4 +17,15 @@ defmodule MarsRover.Vector2D do
     new(x1 + x2, y1 + y2)
   end
 
+  @spec rotate(t(), -90 | 90) :: t()
+  def rotate(%__MODULE__{x: x, y: y}, 90) do
+    new(y, -x)
+  end
+  def rotate(%__MODULE__{x: x, y: y}, -90) do
+    new(-y, x)
+  end
+  def rotate(_vector, degrees) do
+    raise "Vector rotation currently only supports +-90 degrees. Received: #{degrees}"
+  end
+
 end

@@ -26,4 +26,32 @@ defmodule Vector2DTests do
 
   end
 
+  @north new(0, 1)
+  @east new(1, 0)
+  @south new(0, -1)
+  @west new(-1, 0)
+
+  describe "rotation by +- 90 degrees" do
+
+    [
+      {@north, 90, @east},
+      {@north, -90, @west},
+      {@east, 90, @south},
+      {@east, -90, @north},
+      {@south, 90, @west},
+      {@south, -90, @east},
+      {@west, 90, @north},
+      {@west, -90, @south},
+    ]
+    |> Enum.each(fn {vector, rotation, result} ->
+      @tag vector: vector
+      @tag rotation: rotation
+      @tag result: result
+      test "#{inspect(vector)} rotated #{rotation} degrees = #{inspect(result)}", ctx do
+        assert rotate(ctx.vector, ctx.rotation) == ctx.result
+      end
+    end)
+
+  end
+
 end
